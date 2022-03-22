@@ -44,6 +44,14 @@ async function run() {
             const services = await cursor.toArray();
             res.send(services);
         })
+        app.get('/services/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: objectId(id) };
+            const service = await servicesCollection.findOne(query)
+            res.json(service);
+
+
+        })
         app.get('/doctors', async (req, res) => {
             const cursor = doctorsCollection.find({});
             const doctors = await cursor.toArray();
