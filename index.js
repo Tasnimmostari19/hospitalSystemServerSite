@@ -33,6 +33,7 @@ async function run() {
         // console.log('connected');
         const database = client.db("hospital");
         const servicesCollection = database.collection("services");
+        const doctorsCollection = database.collection("doctors");
 
 
 
@@ -41,6 +42,11 @@ async function run() {
             const cursor = servicesCollection.find({});
             const services = await cursor.toArray();
             res.send(services);
+        })
+        app.get('/doctors', async (req, res) => {
+            const cursor = doctorsCollection.find({});
+            const doctors = await cursor.toArray();
+            res.send(doctors);
         })
 
 
@@ -53,7 +59,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('started server genius')
+    res.send('started server')
 })
 
 
